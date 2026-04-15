@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CashQuest</title>
+    <meta
+      name="description"
+      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
+    />
+    <meta name="author" content="Ryan Cao" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CashQuest" />
+    <meta
+      property="og:description"
+      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CashQuest" />
+    <meta
+      name="twitter:description"
+      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
+    />
+    <script>
+      (function () {
+        var redirect = sessionStorage.getItem("cashquest-redirect");
+        if (!redirect) return;
+        sessionStorage.removeItem("cashquest-redirect");
+        history.replaceState(null, "", redirect);
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-CJdngBSO.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CAuItFhP.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

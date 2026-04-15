@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CashQuest</title>
+    <script>
+      (function () {
+        var repoName = "/cashquest-prototype";
+        var path = window.location.pathname;
+        var search = window.location.search || "";
+        var hash = window.location.hash || "";
+        var redirectedPath = path.indexOf(repoName) === 0 ? path.slice(repoName.length) || "/" : path;
+
+        sessionStorage.setItem(
+          "cashquest-redirect",
+          repoName + redirectedPath + search + hash
+        );
+
+        window.location.replace(repoName + "/");
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
