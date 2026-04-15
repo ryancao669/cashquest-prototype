@@ -3,37 +3,192 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CashQuest</title>
+    <title>CashQuest Prototype</title>
     <meta
       name="description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
+      content="CashQuest helps students build financial confidence through quick lessons, quizzes, rewards, and progress tracking."
     />
-    <meta name="author" content="Ryan Cao" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="CashQuest" />
-    <meta
-      property="og:description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CashQuest" />
-    <meta
-      name="twitter:description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
-    />
-    <script>
-      (function () {
-        var redirect = sessionStorage.getItem("cashquest-redirect");
-        if (!redirect) return;
-        sessionStorage.removeItem("cashquest-redirect");
-        history.replaceState(null, "", redirect);
-      })();
-    </script>
     <base href="/cashquest-prototype/" />
-    <script type="module" crossorigin src="assets/index-CJdngBSO.js"></script>
-    <link rel="stylesheet" crossorigin href="assets/index-CAuItFhP.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">CashQuest Prototype</p>
+          <h1>Build money skills in under 3 minutes a lesson.</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="hotspot-toggle" class="ghost-button" type="button" aria-pressed="true">
+            Hotspots On
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="hero card">
+          <div class="hero-copy">
+            <p class="eyebrow">Lesson of the Day</p>
+            <h2 id="lesson-of-day-title">Loading lesson...</h2>
+            <p id="lesson-of-day-description"></p>
+            <div class="hero-actions">
+              <button id="lesson-of-day-button" class="primary-button hotspot-target" type="button">
+                Open lesson
+              </button>
+              <button id="open-library-button" class="secondary-button" type="button">
+                Browse lesson library
+              </button>
+            </div>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <span class="metric-label">Redeemable Coins</span>
+              <strong id="redeemable-points-value">0</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Knowledge Points</span>
+              <strong id="knowledge-points-value">0</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Lessons Completed</span>
+              <strong id="completed-lessons-value">0/0</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Streak</span>
+              <strong id="streak-value">0 days</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">What Students Need</p>
+              <h2>Core Experience</h2>
+            </div>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card card">
+              <h3>Lesson library</h3>
+              <p>Students can quickly find every lesson, see what is locked, and jump back into progress.</p>
+            </article>
+            <article class="feature-card card">
+              <h3>Fast completion</h3>
+              <p>Each ready lesson mixes reading, a short video, a quick exercise, and a final quiz.</p>
+            </article>
+            <article class="feature-card card">
+              <h3>Progress tracking</h3>
+              <p>Knowledge points stay forever while redeemable coins get spent in the rewards shop.</p>
+            </article>
+            <article class="feature-card card">
+              <h3>Rewards + hotspots</h3>
+              <p>Clickable actions glow when hotspots are on, making the demo easier to explain live.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="grid-section">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Library</p>
+              <h2>Lesson Library</h2>
+            </div>
+            <p class="section-copy">
+              Lessons unlock in order. Right now only your first two state-topic lessons are live, and the rest stay locked until content is ready.
+            </p>
+          </div>
+          <div id="lesson-library" class="lesson-grid"></div>
+        </section>
+
+        <section class="split-layout">
+          <div class="card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Progress</p>
+                <h2>Personal Progress</h2>
+              </div>
+            </div>
+            <div class="progress-panel">
+              <div class="progress-bar-shell" aria-hidden="true">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+              </div>
+              <p id="progress-summary" class="support-copy"></p>
+              <div id="lesson-progress-list" class="progress-list"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Rewards</p>
+                <h2>Rewards Shop</h2>
+              </div>
+            </div>
+            <div id="rewards-list" class="reward-list"></div>
+          </div>
+        </section>
+
+        <section class="split-layout">
+          <div class="card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Prototype Notes</p>
+                <h2>What Is Live Now</h2>
+              </div>
+            </div>
+            <ul class="notes-list">
+              <li>Two complete lessons preserve the content from your existing CashQuest page.</li>
+              <li>Future California-required topics are visible but locked to match your current content status.</li>
+              <li>Coins are redeemable and spend down. Knowledge points only track learning progress.</li>
+              <li>Leaderboard is left as an optional post-prototype workstream for the backend phase.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Coming Later</p>
+                <h2>Competitive Leaderboard</h2>
+              </div>
+            </div>
+            <div class="leaderboard-placeholder">
+              <strong>Optional for later</strong>
+              <p>
+                The leaderboard is intentionally placeholder-only for now while accounts, security, points syncing, and backend progress tracking are still future workstreams.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="lesson-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="lesson-modal-title">
+        <button id="lesson-modal-close" class="modal-close" type="button" aria-label="Close lesson">
+          Close
+        </button>
+        <div id="lesson-modal-content"></div>
+      </div>
+    </div>
+
+    <template id="lesson-step-template">
+      <article class="lesson-step card">
+        <div class="step-header">
+          <span class="step-tag"></span>
+          <span class="step-index"></span>
+        </div>
+        <h3 class="step-title"></h3>
+        <div class="step-body"></div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
   </body>
 </html>
