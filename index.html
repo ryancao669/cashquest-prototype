@@ -3,37 +3,160 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CashQuest</title>
+    <title>Cash Quest</title>
     <meta
       name="description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
+      content="Cash Quest helps students build financial literacy through quick lessons, points, and rewards."
     />
-    <meta name="author" content="Ryan Cao" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="CashQuest" />
-    <meta
-      property="og:description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CashQuest" />
-    <meta
-      name="twitter:description"
-      content="CashQuest helps you learn personal finance through lessons, rewards, and progress tracking."
-    />
-    <script>
-      (function () {
-        var redirect = sessionStorage.getItem("cashquest-redirect");
-        if (!redirect) return;
-        sessionStorage.removeItem("cashquest-redirect");
-        history.replaceState(null, "", redirect);
-      })();
-    </script>
     <base href="/cashquest-prototype/" />
-    <script type="module" crossorigin src="assets/index-CJdngBSO.js"></script>
-    <link rel="stylesheet" crossorigin href="assets/index-CAuItFhP.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">$</div>
+          <div class="brand-text">Cash Quest</div>
+        </div>
+
+        <nav class="topnav" aria-label="Primary">
+          <button class="nav-pill active" data-nav-target="home" type="button">Home</button>
+          <button class="nav-pill" data-nav-target="lessons" type="button">Lessons</button>
+          <button class="nav-pill" data-nav-target="progress" type="button">Progress</button>
+          <button class="nav-pill" data-nav-target="rewards" type="button">Rewards</button>
+        </nav>
+
+        <div class="point-pills">
+          <div class="point-pill point-pill-kp">0 KP</div>
+          <div class="point-pill point-pill-rp">0 RP</div>
+        </div>
+      </header>
+
+      <main class="page-content">
+        <section id="section-home" class="hero-panel">
+          <div class="hero-kicker">Cash Quest</div>
+          <h1>Master Your Money</h1>
+          <p>
+            Learn financial literacy through quick lessons, earn points, and redeem real rewards. Built by MHS students, for MHS students.
+          </p>
+          <div class="hero-actions">
+            <button id="lesson-of-day-button" class="hero-primary hotspot-target" type="button">Start Learning</button>
+            <button id="view-progress-button" class="hero-secondary" type="button">View Progress</button>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-icon">KP</span>
+            <strong id="knowledge-points-value">0</strong>
+            <p>Knowledge Points</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon">RP</span>
+            <strong id="redeemable-points-value">0</strong>
+            <p>Redeemable Points</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon">LS</span>
+            <strong id="completed-lessons-value">0/0</strong>
+            <p>Lessons Done</p>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon">ST</span>
+            <strong id="streak-value">0</strong>
+            <p>Day Streak</p>
+          </article>
+        </section>
+
+        <section id="section-progress" class="panel-card progress-card">
+          <div class="panel-head">
+            <h2>Overall Progress</h2>
+            <span id="progress-percent-label">0%</span>
+          </div>
+          <div class="progress-bar-shell" aria-hidden="true">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+          <p id="progress-summary" class="panel-copy"></p>
+          <div id="lesson-progress-list" class="progress-list"></div>
+        </section>
+
+        <section class="panel-card lesson-of-day-card">
+          <div class="panel-kicker">Lesson of the Day</div>
+          <h2 id="lesson-of-day-title">Loading lesson...</h2>
+          <p id="lesson-of-day-description" class="panel-copy"></p>
+          <div class="lesson-of-day-actions">
+            <button class="lesson-start-button hotspot-target" id="lesson-of-day-secondary" type="button">Start Lesson</button>
+            <span id="lesson-of-day-meta" class="lesson-meta-inline"></span>
+          </div>
+        </section>
+
+        <section class="shortcut-grid">
+          <button class="shortcut-card hotspot-target" data-nav-target="lessons" type="button">
+            <div class="shortcut-icon">LS</div>
+            <div class="shortcut-copy">
+              <strong>Lesson Library</strong>
+              <span>Open available lessons and see what is locked</span>
+            </div>
+            <span class="shortcut-arrow">&gt;</span>
+          </button>
+          <button class="shortcut-card hotspot-target" data-nav-target="rewards" type="button">
+            <div class="shortcut-icon shortcut-icon-gold">RP</div>
+            <div class="shortcut-copy">
+              <strong>Rewards Store</strong>
+              <span>Redeem your points for prizes</span>
+            </div>
+            <span class="shortcut-arrow">&gt;</span>
+          </button>
+        </section>
+
+        <section id="section-lessons" class="panel-card">
+          <div class="panel-head">
+            <h2>Lesson Library</h2>
+            <button id="hotspot-toggle" class="hotspot-toggle" type="button" aria-pressed="true">Hotspots On</button>
+          </div>
+          <p class="panel-copy">
+            Students can find the full roadmap here. Only the first two lessons are live right now, and the rest stay locked until content is ready.
+          </p>
+          <div id="lesson-library" class="lesson-library-grid"></div>
+        </section>
+
+        <section id="section-rewards" class="panel-card">
+          <div class="panel-head">
+            <h2>Rewards Store</h2>
+          </div>
+          <p class="panel-copy">
+            Redeemable points get spent here. Knowledge points stay on your profile to show learning progress.
+          </p>
+          <div id="rewards-list" class="rewards-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="lesson-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="lesson-modal-title">
+        <button id="lesson-modal-close" class="modal-close" type="button" aria-label="Close lesson">Close</button>
+        <div id="lesson-modal-content"></div>
+      </div>
+    </div>
+
+    <template id="lesson-step-template">
+      <article class="lesson-step">
+        <div class="step-topline">
+          <span class="step-tag"></span>
+          <span class="step-index"></span>
+        </div>
+        <h3 class="step-title"></h3>
+        <div class="step-body"></div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
   </body>
 </html>
